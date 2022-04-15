@@ -1,0 +1,23 @@
+[0m[[0m[0mdebug[0m] [0m[0mPackaging /Users/jbahn/Projects/slox/target/scala-3.1.2/slox_3-0.1.0-SNAPSHOT.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	lox$package.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/lox$package.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	lox$package$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/lox$package$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Lox.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/Lox.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Lox.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/Lox.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	lox$package.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/lox$package.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	test$package.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/test$package.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	main.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/main.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	main.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/main.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	test$package$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/test$package$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	test$package.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/test$package.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m
