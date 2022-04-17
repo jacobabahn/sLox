@@ -1,0 +1,34 @@
+[0m[[0m[31merror[0m] [0m[0m/Users/jbahn/Projects/slox/src/main/scala/Scanner.scala:40:37: '(' expected but identifier found.[0m
+[0m[[0m[31merror[0m] [0m[0m            case '!' => addToken(if checkToken('=') then (TokenType.BANG_EQUAL) else (TokenType.BANG))[0m
+[0m[[0m[31merror[0m] [0m[0m                                    ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jbahn/Projects/slox/src/main/scala/Scanner.scala:69:9: illegal start of simple expression[0m
+[0m[[0m[31merror[0m] [0m[0m        }[0m
+[0m[[0m[31merror[0m] [0m[0m        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jbahn/Projects/slox/src/main/scala/TokenType.scala:3:1: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0menum TokenType {[0m
+[0m[[0m[31merror[0m] [0m[0m^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jbahn/Projects/slox/src/main/scala/lox.scala:4:7: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m@main def main() = {[0m
+[0m[[0m[31merror[0m] [0m[0m      ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jbahn/Projects/slox/src/main/scala/lox.scala:9:10: ';' expected but ':' found.[0m
+[0m[[0m[31merror[0m] [0m[0mclass Lox:[0m
+[0m[[0m[31merror[0m] [0m[0m         ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jbahn/Projects/slox/src/main/scala/lox.scala:12:2: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m	def main(args: Array[String]) = {[0m
+[0m[[0m[31merror[0m] [0m[0m	^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jbahn/Projects/slox/src/main/scala/lox.scala:23:10: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m	private def runFile(path: String) = {[0m
+[0m[[0m[31merror[0m] [0m[0m	        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jbahn/Projects/slox/src/main/scala/lox.scala:28:10: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m	private def runPrompt() = {[0m
+[0m[[0m[31merror[0m] [0m[0m	        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jbahn/Projects/slox/src/main/scala/lox.scala:37:10: expected start of definition[0m
+[0m[[0m[31merror[0m] [0m[0m	private def run(source: String) = {[0m
+[0m[[0m[31merror[0m] [0m[0m	        ^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jbahn/Projects/slox/src/main/scala/lox.scala:46:2: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m	def error(line: Int, message: String) = {[0m
+[0m[[0m[31merror[0m] [0m[0m	^[0m
+[0m[[0m[31merror[0m] [0m[0m/Users/jbahn/Projects/slox/src/main/scala/lox.scala:50:2: expected class or object definition[0m
+[0m[[0m[31merror[0m] [0m[0m	def report(line: Int, where: String, message: String) = {[0m
+[0m[[0m[31merror[0m] [0m[0m	^[0m
+[0m[[0m[31merror[0m] [0m[0m11 errors found[0m

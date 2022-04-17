@@ -1,3 +1,5 @@
+package tokentype
+
 enum TokenType {
     case LEFT_PAREN extends TokenType
     case RIGHT_PAREN extends TokenType
@@ -40,4 +42,6 @@ enum TokenType {
     case TRUE extends TokenType
     case VAR extends TokenType
     case WHILE extends TokenType
+
+    case EOF extends TokenType
 }

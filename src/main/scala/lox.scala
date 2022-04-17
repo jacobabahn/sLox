@@ -1,12 +1,16 @@
+package lox
+import scanner.Scanner
+
 @main def main() = {
 	var lox = Lox()
-	lox.main
+	lox.main()
 }
 
 class Lox:
 	var hadError = false
 
 	def main(args: Array[String]) = {
+		println("main")
 		if (args.length > 1) then
 			println("Usage: lox [script]")
 			sys.exit(64)
@@ -39,11 +43,11 @@ class Lox:
 		}
 	}
 
-	private def error(line: Int, message: String) = {
+	def error(line: Int, message: String) = {
 		report(line, "", message)
 	}
 
-	private def report(line: Int, where: String, message: String) = {
+	def report(line: Int, where: String, message: String) = {
 		println("[line " + line + "] Error" + where + ": " + message)
 		hadError = true
 	}
