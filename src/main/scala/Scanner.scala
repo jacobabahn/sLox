@@ -19,13 +19,12 @@ class Scanner(var source: String) {
             scanToken()
         }
 
-        tokens :+ (new Token(TokenType.EOF, "", null, line))
+        tokens = tokens :+ (new Token(TokenType.EOF, "", null, line))
         return tokens
     }
 
     def scanToken(): Any = {
         var c = this.advance()
-
         c match {
             case '(' => addToken(TokenType.LEFT_PAREN)
             case ')' => addToken(TokenType.RIGHT_PAREN)
@@ -75,7 +74,10 @@ class Scanner(var source: String) {
         }
 
         val text = source.substring(start, current)
-        val token = keywords.get(text)
+        val token = keywords.get(text) match {
+            case None => TokenType.IDENTIFIER
+            case Some(tokenType) => tokenType
+        }
         if (token == null) {
             addToken(TokenType.IDENTIFIER)
         } else {
@@ -157,7 +159,7 @@ class Scanner(var source: String) {
 
     private def addToken(tokenType: Any) = {
         val text = source.substring(start, current)
-        tokens :+ (new Token(tokenType, text, null, line))
+        tokens = tokens :+ (new Token(tokenType, text, null, line))
     }
 
     val keywords = Map(

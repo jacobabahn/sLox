@@ -1,16 +1,17 @@
 package lox
 import scanner.Scanner
 
-@main def main() = {
-	var lox = Lox()
-	lox.main()
+object sLox {
+	def main(args: Array[String]): Unit = {
+		var lox = Lox()
+		lox.main(args)
+	}
 }
 
 class Lox:
 	var hadError = false
 
 	def main(args: Array[String]) = {
-		println("main")
 		if (args.length > 1) then
 			println("Usage: lox [script]")
 			sys.exit(64)
@@ -45,6 +46,13 @@ class Lox:
 
 	def error(line: Int, message: String) = {
 		report(line, "", message)
+	}
+
+	def error(token: Token, message: String) = {
+		if (token.toktype == TokenType.EOF) then
+			report(token.line, " at end", message)
+		else
+			report(token.line, " at '" + token.lexeme + "'", message)
 	}
 
 	def report(line: Int, where: String, message: String) = {

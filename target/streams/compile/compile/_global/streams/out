@@ -1,5 +1,5 @@
-[0m[[0m[31merror[0m] [0m[0m[31m-- Error: /Users/jbahn/Projects/slox/src/main/scala/lox.scala:6:8 --------------[0m[0m
-[0m[[0m[31merror[0m] [0m[0m[31m6 |[0m	lox.main()[0m
-[0m[[0m[31merror[0m] [0m[0m  |	[31m^^^^^^^^^^[0m[0m
-[0m[[0m[31merror[0m] [0m[0m  |missing argument for parameter args of [33mmethod[0m [35mmain[0m in [33mclass[0m [35mLox[0m: (args: Array[String]): Unit[0m
+[0m[[0m[31merror[0m] [0m[0m[31m-- Error: /Users/jbahn/Projects/slox/src/main/scala/lox.scala:41:14 ------------[0m[0m
+[0m[[0m[31merror[0m] [0m[0m[31m41 |[0m		println(tokens[[35m0[0m].name)[0m
+[0m[[0m[31merror[0m] [0m[0m   |		        [31m^^^^^^^^^[0m[0m
+[0m[[0m[31merror[0m] [0m[0m   |		        [33mmethod[0m [35mapply[0m in [33mclass[0m [35mArray[0m does not take type parameters[0m
 [0m[[0m[31merror[0m] [0m[0mone error found[0m
