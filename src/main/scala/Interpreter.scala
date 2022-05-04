@@ -33,6 +33,21 @@ class Interpreter() extends Visitor[Object], sVisitor[Unit] {
         return value.asInstanceOf[Object]
     }
 
+    override def visitLogicalExpr(expr: Logical): Object = {
+        val left = evaluate(expr.left)
+
+        if (expr.operator.toktype == TokenType.OR) {
+            if (isTruthy(left)) {
+                return left
+            }
+        } else {
+            if (!isTruthy(left)) {
+                return left
+            }
+        }
+        return evaluate(expr.right)
+    }
+
     override def visitUnaryExpr(expr: Unary): Object = {
         var right = evaluate(expr.right)
 
@@ -123,6 +138,15 @@ class Interpreter() extends Visitor[Object], sVisitor[Unit] {
         return null
     }
 
+    override def visitIfStmt(stmt: If): Unit = {
+        if (isTruthy(evaluate(stmt.condition))) {
+            execute(stmt.thenBranch)
+        } else if (stmt.elseBranch != null) {
+            execute(stmt.elseBranch)
+        }
+        return null
+    }
+
     override def visitPrintStmt(stmt: Print): Unit = {
         var value = evaluate(stmt.expression)
         println(stringify(value))
@@ -134,6 +158,13 @@ class Interpreter() extends Visitor[Object], sVisitor[Unit] {
         if (stmt.initializer != Literal(null)) then value = evaluate(stmt.initializer) else value = Literal(null)
 
         environment.define(stmt.name.lexeme, value)
+        return null
+    }
+
+    override def visitWhileStmt(stmt: While): Unit = {
+        while (isTruthy(evaluate(stmt.condition))) {
+            execute(stmt.body)
+        }
         return null
     }
 

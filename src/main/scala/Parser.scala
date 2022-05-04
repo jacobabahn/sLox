@@ -43,12 +43,69 @@ class Parser(var tokens: Array[Token]) {
     }
 
     private def statement(): Stmt = {
+        if (matchToken(Array(TokenType.IF))) then
+            return ifStatement()
+        if (matchToken(Array(TokenType.FOR))) then
+            return forStatement()
         if (matchToken(Array(TokenType.PRINT))) then
             return printStatement()
+        if (matchToken(Array(TokenType.WHILE))) then
+            return whileStatement()
         if (matchToken(Array(TokenType.LEFT_BRACE))) then
             return new Block(block())
 
         return expressionStatement()
+    }
+
+    private def forStatement(): Stmt = {
+        consume(TokenType.LEFT_PAREN, "Expect '(' after 'for'.")
+        var initializer: Stmt = Expression(null)
+
+        if (matchToken(Array(TokenType.SEMICOLON))) then
+            initializer = Expression(null)
+        else if (matchToken(Array(TokenType.VAR))) then
+            initializer = varDeclaration()
+        else
+            initializer = expressionStatement()
+        
+        var condition: Expr = Literal(null)
+        if (!check(TokenType.SEMICOLON)) then
+            condition = expression()
+        
+        consume(TokenType.SEMICOLON, "Expect ';' after loop condition.")
+
+        var increment: Expr = Literal(null)
+        if (!check(TokenType.RIGHT_PAREN)) then
+            increment = expression()
+        
+        consume(TokenType.RIGHT_PAREN, "Expect ')' after for clauses.")
+        var body = statement()
+
+        if (increment != null) then
+            body = Block(Array(body, Expression(increment)))
+
+        if (condition == null) then
+            condition = Literal(true)
+
+        body = While(condition, body)
+
+        if (initializer != null) then
+            body = Block(Array(initializer, body))
+
+        return body
+    }
+
+    private def ifStatement(): Stmt = {
+        consume(TokenType.LEFT_PAREN, "Expect '(' after 'if'.")
+        var condition = expression()
+        consume(TokenType.RIGHT_PAREN, "Expect ')' after if condition.")
+
+        var thenBranch = statement()
+        var elseBranch: Stmt = Expression(null)
+        if (matchToken(Array(TokenType.ELSE))) then
+            elseBranch = statement()
+        
+        return If(condition, thenBranch, elseBranch)
     }
 
     private def printStatement(): Stmt = {
@@ -65,6 +122,15 @@ class Parser(var tokens: Array[Token]) {
 
         consume(TokenType.SEMICOLON, "Expect ';' after variable declaration.")
         return new Var(name, initializer)
+    }
+
+    private def whileStatement(): Stmt = {
+        consume(TokenType.LEFT_PAREN, "Expect '(' after 'while'.")
+        var condition = expression()
+        consume(TokenType.RIGHT_PAREN, "Expect ')' after condition.")
+        var body = statement()
+
+        return While(condition, body)
     }
 
     private def expressionStatement(): Stmt = {
@@ -85,7 +151,7 @@ class Parser(var tokens: Array[Token]) {
     }
 
     private def assignment(): Expr = {
-        var expr = equality()
+        var expr = or()
 
         if (matchToken(Array(TokenType.EQUAL))) {
             var equals = previous()
@@ -97,6 +163,30 @@ class Parser(var tokens: Array[Token]) {
             }
 
             error(equals, "Invalid assignment target.")
+        }
+        
+        return expr
+    }
+
+    private def or(): Expr = {
+        var expr = and()
+
+        while (matchToken(Array(TokenType.OR))) {
+            var operator = previous()
+            var right = and()
+            expr = Logical(expr, operator, right)
+        }
+        
+        return expr
+    }
+
+    private def and(): Expr = {
+        var expr = equality()
+
+        while (matchToken(Array(TokenType.AND))) {
+            var operator = previous()
+            var right = equality()
+            expr = Logical(expr, operator, right)
         }
         
         return expr
