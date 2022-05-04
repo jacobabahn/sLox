@@ -5,6 +5,7 @@ import stmt._
 import lox.Lox
 import tokentype._
 import token._
+import environment._
 import runtimeerror._
 import math.Fractional.Implicits.infixFractionalOps
 import math.Integral.Implicits.infixIntegralOps
@@ -12,6 +13,8 @@ import math.Numeric.Implicits.infixNumericOps
 
 
 class Interpreter() extends Visitor[Object], sVisitor[Unit] {
+    private var environment: Environment = new Environment()
+
     def interpret(statements: Array[Stmt]) = {
         try {
             for (statement <- statements) {
@@ -43,6 +46,10 @@ class Interpreter() extends Visitor[Object], sVisitor[Unit] {
         }
 
         return null
+    }
+
+    override def visitVariableExpr(expr: Variable): Object = {
+        return environment.get(expr.name)
     }
 
     private def checkNumberOperand(operator: Token, operand: Object): Unit = {
@@ -102,6 +109,14 @@ class Interpreter() extends Visitor[Object], sVisitor[Unit] {
     override def visitPrintStmt(stmt: Print): Unit = {
         var value = evaluate(stmt.expression)
         println(stringify(value))
+        return null
+    }
+
+    override def visitVarStmt(stmt: Var): Unit = {
+        var value: Object = new Literal(null)
+        if (stmt.initializer != Literal(null)) then value = evaluate(stmt.initializer) else value = Literal(null)
+
+        environment.define(stmt.name.lexeme, value)
         return null
     }
 

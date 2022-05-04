@@ -5,7 +5,6 @@ import interpreter._
 import runtimeerror.RuntimeError
 import token.Token
 import tokentype.TokenType
-import astprinter.AstPrinter
 
 object sLox {
 	def main(args: Array[String]): Unit = {

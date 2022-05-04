@@ -8,6 +8,7 @@ trait Visitor[R] {
 	def visitGroupingExpr(expr: Grouping): R
 	def visitLiteralExpr(expr: Literal): R
 	def visitUnaryExpr(expr: Unary): R
+	def visitVariableExpr(expr: Variable): R
 }
 
 abstract class Expr {
@@ -28,4 +29,8 @@ class Literal(val value: Any) extends Expr {
 
 class Unary(val operator: Token, val right: Expr) extends Expr {
 	override def accept[R](visitor: Visitor[R]): R = return visitor.visitUnaryExpr(this)
+}
+
+class Variable(val name: Token) extends Expr {
+	override def accept[R](visitor: Visitor[R]): R = return visitor.visitVariableExpr(this)
 }

@@ -19,13 +19,27 @@ class Parser(var tokens: Array[Token]) {
         var statements: Array[Stmt] = Array()
 
         while (!isAtEnd()) {
-            statements = statements :+ statement()
+            statements = statements :+ declaration()
         }
         return statements
     }
 
     private def expression(): Expr = {
         return equality()
+    }
+
+    private def declaration(): Stmt = {
+        try {
+            if (matchToken(Array(TokenType.VAR))) {
+                return varDeclaration()
+            }
+            return statement()
+        } catch {
+            case e: ParseError => {
+                synchronize()
+                return null
+            }
+        }
     }
 
     private def statement(): Stmt = {
@@ -40,6 +54,16 @@ class Parser(var tokens: Array[Token]) {
         val value = expression()
         consume(TokenType.SEMICOLON, "Expect ';' after value.")
         return new Print(value)
+    }
+
+    private def varDeclaration(): Stmt = {
+        var name = consume(TokenType.IDENTIFIER, "Expect variable name.")
+        var initializer: Expr = new Literal(null)
+        if (matchToken(Array(TokenType.EQUAL))) then
+            initializer = expression()
+
+        consume(TokenType.SEMICOLON, "Expect ';' after variable declaration.")
+        return new Var(name, initializer)
     }
 
     private def expressionStatement(): Stmt = {
@@ -118,6 +142,9 @@ class Parser(var tokens: Array[Token]) {
 
         if (matchToken(Array(TokenType.NUMBER, TokenType.STRING))) then
             return Literal(previous().literal)
+        
+        if (matchToken(Array(TokenType.IDENTIFIER))) then
+            return Variable(previous())
 
         if (matchToken(Array(TokenType.LEFT_PAREN))) then
             val expr = expression()
@@ -137,11 +164,11 @@ class Parser(var tokens: Array[Token]) {
         }
 
 
-    private def consume(tok: TokenType, message: String): Unit = {
+    private def consume(tok: TokenType, message: String): Token = {
         if (check(tok)) then
-            advance()
+            return advance()
         else
-            error(peek(), message)
+            throw error(peek(), message)
     }
 
     private def check(tokenType: TokenType): Boolean = {
