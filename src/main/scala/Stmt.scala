@@ -3,6 +3,7 @@ import token.Token
 import expr._
 
 trait sVisitor[R] {
+    def visitBlockStmt(stmt: Block): R
     def visitExpressionStmt(stmt: Expression): R
     def visitPrintStmt(stmt: Print): R
     def visitVarStmt(stmt: Var): R
@@ -10,6 +11,10 @@ trait sVisitor[R] {
 
 abstract class Stmt {
     def accept[R](visitor: sVisitor[R]): R
+}
+
+class Block(val statements: Array[Stmt]) extends Stmt {
+    override def accept[R](visitor: sVisitor[R]): R = visitor.visitBlockStmt(this)
 }
 
 class Expression(var expression: Expr) extends Stmt {

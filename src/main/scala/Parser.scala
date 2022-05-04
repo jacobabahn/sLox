@@ -43,9 +43,10 @@ class Parser(var tokens: Array[Token]) {
     }
 
     private def statement(): Stmt = {
-        if (matchToken(Array(TokenType.PRINT))) {
+        if (matchToken(Array(TokenType.PRINT))) then
             return printStatement()
-        }
+        if (matchToken(Array(TokenType.LEFT_BRACE))) then
+            return new Block(block())
 
         return expressionStatement()
     }
@@ -70,6 +71,17 @@ class Parser(var tokens: Array[Token]) {
         val expr = expression()
         consume(TokenType.SEMICOLON, "Expect ';' after expression.")
         return new Expression(expr)
+    }
+
+    private def block(): Array[Stmt] = {
+        var statements: Array[Stmt] = Array()
+
+        while (!check(TokenType.RIGHT_BRACE) && !isAtEnd()) {
+            statements = statements :+ declaration()
+        }
+
+        consume(TokenType.RIGHT_BRACE, "Expect '}' after block.")
+        return statements
     }
 
     private def assignment(): Expr = {

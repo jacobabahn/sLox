@@ -101,6 +101,23 @@ class Interpreter() extends Visitor[Object], sVisitor[Unit] {
         stmt.accept(this)
     }
 
+    def executeBlock(statements: Array[Stmt], environment: Environment): Unit = {
+        val previous = this.environment
+        try {
+            this.environment = environment
+            for (statement <- statements) {
+                execute(statement)
+            }
+        } finally {
+            this.environment = previous
+        }
+    }
+
+    override def visitBlockStmt(stmt: Block): Unit = {
+        executeBlock(stmt.statements, new Environment(environment))
+        return null
+    }
+
     override def visitExpressionStmt(stmt: Expression): Unit = {
         evaluate(stmt.expression)
         return null
