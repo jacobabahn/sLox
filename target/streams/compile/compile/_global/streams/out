@@ -1,5 +1,5 @@
-[0m[[0m[33mwarn[0m] [0m[0m[33m-- [E029] Pattern Match Exhaustivity Warning: /Users/jbahn/Projects/slox/src/main/scala/Parser.scala:170:12 [0m[0m
-[0m[[0m[33mwarn[0m] [0m[0m[33m170 |[0m            test [33mmatch[0m {[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m-- [E029] Pattern Match Exhaustivity Warning: /Users/jbahn/Projects/slox/src/main/scala/Parser.scala:191:12 [0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m191 |[0m            test [33mmatch[0m {[0m
 [0m[[0m[33mwarn[0m] [0m[0m    |            [33m^^^^[0m[0m
 [0m[[0m[33mwarn[0m] [0m[0m    |[33mmatch[0m may not be exhaustive.[0m
 [0m[[0m[33mwarn[0m] [0m[0m    |[0m

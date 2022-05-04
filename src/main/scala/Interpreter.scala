@@ -1,6 +1,7 @@
 package interpreter
 
 import expr._
+import stmt._
 import lox.Lox
 import tokentype._
 import token._
@@ -10,11 +11,12 @@ import math.Integral.Implicits.infixIntegralOps
 import math.Numeric.Implicits.infixNumericOps
 
 
-class Interpreter() extends Visitor[Object] {
-    def interpret(expression: Expr) = {
+class Interpreter() extends Visitor[Object], sVisitor[Unit] {
+    def interpret(statements: Array[Stmt]) = {
         try {
-            val value = evaluate(expression)
-            println(stringify(value))
+            for (statement <- statements) {
+                execute(statement)
+            }
         } catch {
             case e: RuntimeError => {
                 val lox = new Lox()
@@ -86,6 +88,21 @@ class Interpreter() extends Visitor[Object] {
 
     private def evaluate(expr: Expr): Object = {
         return expr.accept(this)
+    }
+
+    private def execute(stmt: Stmt): Unit = {
+        stmt.accept(this)
+    }
+
+    override def visitExpressionStmt(stmt: Expression): Unit = {
+        evaluate(stmt.expression)
+        return null
+    }
+
+    override def visitPrintStmt(stmt: Print): Unit = {
+        var value = evaluate(stmt.expression)
+        println(stringify(value))
+        return null
     }
 
     override def visitBinaryExpr(expr: Binary): AnyRef = {

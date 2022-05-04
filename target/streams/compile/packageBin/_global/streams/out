@@ -1,5 +1,23 @@
 [0m[[0m[0mdebug[0m] [0m[0mPackaging /Users/jbahn/Projects/slox/target/scala-3.1.2/slox_3-0.1.0-SNAPSHOT.jar ...[0m
 [0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	stmt[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/stmt[0m
+[0m[[0m[0mdebug[0m] [0m[0m	stmt/Print.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/stmt/Print.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	stmt/Expression.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/stmt/Expression.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	stmt/Expression.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/stmt/Expression.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	stmt/Print.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/stmt/Print.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	stmt/sVisitor.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/stmt/sVisitor.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	stmt/Stmt.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/stmt/Stmt.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	stmt/Stmt.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/stmt/Stmt.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	stmt/sVisitor.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/stmt/sVisitor.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0m	token[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/token[0m
 [0m[[0m[0mdebug[0m] [0m[0m	token/Token.tasty[0m

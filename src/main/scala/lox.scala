@@ -47,12 +47,13 @@ class Lox:
 	private def run(source: String): Unit = {
 		val scanner = new Scanner(source)
 		val tokens = scanner.scanTokens()
+
 		val parser = new Parser(tokens)
-		val expression = parser.parse()
+		val statements = parser.parse()
 
 		if hadError then return
 		
-		interpreter.interpret(expression)
+		interpreter.interpret(statements)
 	}
 
 	def error(line: Int, message: String) = {

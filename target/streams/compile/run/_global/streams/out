@@ -1,7 +1,16 @@
-[0m[[0m[31merror[0m] [0m[0mjava.lang.NullPointerException: Cannot invoke "expr.Expr.accept(expr.Visitor)" because "expr" is null[0m
-[0m[[0m[31merror[0m] [0m[0m	at interpreter.Interpreter.evaluate(Interpreter.scala:88)[0m
-[0m[[0m[31merror[0m] [0m[0m	at interpreter.Interpreter.interpret(Interpreter.scala:16)[0m
-[0m[[0m[31merror[0m] [0m[0m	at lox.Lox.run(lox.scala:56)[0m
+[0m[[0m[31merror[0m] [0m[0mparser.Parser$ParseError[0m
+[0m[[0m[31merror[0m] [0m[0m	at parser.Parser.error(Parser.scala:181)[0m
+[0m[[0m[31merror[0m] [0m[0m	at parser.Parser.primary(Parser.scala:129)[0m
+[0m[[0m[31merror[0m] [0m[0m	at parser.Parser.unary(Parser.scala:108)[0m
+[0m[[0m[31merror[0m] [0m[0m	at parser.Parser.factor(Parser.scala:90)[0m
+[0m[[0m[31merror[0m] [0m[0m	at parser.Parser.term(Parser.scala:78)[0m
+[0m[[0m[31merror[0m] [0m[0m	at parser.Parser.comparison(Parser.scala:66)[0m
+[0m[[0m[31merror[0m] [0m[0m	at parser.Parser.equality(Parser.scala:54)[0m
+[0m[[0m[31merror[0m] [0m[0m	at parser.Parser.expression(Parser.scala:29)[0m
+[0m[[0m[31merror[0m] [0m[0m	at parser.Parser.printStatement(Parser.scala:42)[0m
+[0m[[0m[31merror[0m] [0m[0m	at parser.Parser.statement(Parser.scala:34)[0m
+[0m[[0m[31merror[0m] [0m[0m	at parser.Parser.parse(Parser.scala:22)[0m
+[0m[[0m[31merror[0m] [0m[0m	at lox.Lox.run(lox.scala:52)[0m
 [0m[[0m[31merror[0m] [0m[0m	at lox.Lox.runPrompt(lox.scala:42)[0m
 [0m[[0m[31merror[0m] [0m[0m	at lox.Lox.main(lox.scala:29)[0m
 [0m[[0m[31merror[0m] [0m[0m	at lox.sLox$.main(lox.scala:13)[0m
@@ -21,4 +30,4 @@
 [0m[[0m[31merror[0m] [0m[0m	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)[0m
 [0m[[0m[31merror[0m] [0m[0m	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)[0m
 [0m[[0m[31merror[0m] [0m[0m	at java.base/java.lang.Thread.run(Thread.java:833)[0m
-[0m[[0m[31merror[0m] [0m[0m(Compile / [31mrun[0m) java.lang.NullPointerException: Cannot invoke "expr.Expr.accept(expr.Visitor)" because "expr" is null[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mrun[0m) parser.Parser$ParseError[0m

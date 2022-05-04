@@ -1,6 +1,7 @@
 package parser
 
 import expr._
+import stmt._
 import scala.annotation.switch
 import token.Token
 import tokentype.TokenType
@@ -14,18 +15,37 @@ class Parser(var tokens: Array[Token]) {
         this.tokens = tokens
     }
 
-    def parse(): Expr = {
-        try {
-            return expression()
-        } catch {
-            case e: ParseError => {
-                return null
-            }
+    def parse(): Array[Stmt] = {
+        var statements: Array[Stmt] = Array()
+
+        while (!isAtEnd()) {
+            statements = statements :+ statement()
         }
+        return statements
     }
 
     private def expression(): Expr = {
         return equality()
+    }
+
+    private def statement(): Stmt = {
+        if (matchToken(Array(TokenType.PRINT))) {
+            return printStatement()
+        }
+
+        return expressionStatement()
+    }
+
+    private def printStatement(): Stmt = {
+        val value = expression()
+        consume(TokenType.SEMICOLON, "Expect ';' after value.")
+        return new Print(value)
+    }
+
+    private def expressionStatement(): Stmt = {
+        val expr = expression()
+        consume(TokenType.SEMICOLON, "Expect ';' after expression.")
+        return new Expression(expr)
     }
 
     private def equality(): Expr = {
@@ -103,7 +123,6 @@ class Parser(var tokens: Array[Token]) {
             val expr = expression()
             consume(TokenType.RIGHT_PAREN, "Expect ')' after expression.")
             return Grouping(expr)
-        
         throw error(peek(), "Expect expression.")
     }
 
