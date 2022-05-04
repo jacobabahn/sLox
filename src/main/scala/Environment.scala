@@ -12,6 +12,13 @@ class Environment {
         throw new RuntimeError(name, "Undefined variable '" + name.lexeme + "'.")
     }
 
+    def assign(name: Token, value: Object) = {
+        if (values.contains(name.lexeme)) then
+            values += (name.lexeme -> value)
+        else
+            throw new RuntimeError(name, "Undefined variable '" + name.lexeme + "'.")
+    }
+
     def define(name: String, value: Object): Unit = {
         values += (name -> value)
     }

@@ -17,15 +17,15 @@
 [0m[[0m[33mwarn[0m] [0m[0m   |[0m
 [0m[[0m[33mwarn[0m] [0m[0m   |It would fail on pattern case: LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE, COMMA, DOT[0m
 [0m[[0m[33mwarn[0m] [0m[0m   |(More unmatched cases are elided)[0m
-[0m[[0m[33mwarn[0m] [0m[0m[33m-- [E029] Pattern Match Exhaustivity Warning: /Users/jbahn/Projects/slox/src/main/scala/Interpreter.scala:128:8 [0m[0m
-[0m[[0m[33mwarn[0m] [0m[0m[33m128 |[0m        op [33mmatch[0m {[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m-- [E029] Pattern Match Exhaustivity Warning: /Users/jbahn/Projects/slox/src/main/scala/Interpreter.scala:134:8 [0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m134 |[0m        op [33mmatch[0m {[0m
 [0m[[0m[33mwarn[0m] [0m[0m    |        [33m^^[0m[0m
 [0m[[0m[33mwarn[0m] [0m[0m    |[33mmatch[0m may not be exhaustive.[0m
 [0m[[0m[33mwarn[0m] [0m[0m    |[0m
 [0m[[0m[33mwarn[0m] [0m[0m    |It would fail on pattern case: LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE, COMMA, DOT[0m
 [0m[[0m[33mwarn[0m] [0m[0m    |(More unmatched cases are elided)[0m
-[0m[[0m[33mwarn[0m] [0m[0m[33m-- [E029] Pattern Match Exhaustivity Warning: /Users/jbahn/Projects/slox/src/main/scala/Parser.scala:216:12 [0m[0m
-[0m[[0m[33mwarn[0m] [0m[0m[33m216 |[0m            test [33mmatch[0m {[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m-- [E029] Pattern Match Exhaustivity Warning: /Users/jbahn/Projects/slox/src/main/scala/Parser.scala:234:12 [0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m234 |[0m            test [33mmatch[0m {[0m
 [0m[[0m[33mwarn[0m] [0m[0m    |            [33m^^^^[0m[0m
 [0m[[0m[33mwarn[0m] [0m[0m    |[33mmatch[0m may not be exhaustive.[0m
 [0m[[0m[33mwarn[0m] [0m[0m    |[0m

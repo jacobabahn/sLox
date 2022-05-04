@@ -120,6 +120,12 @@ class Interpreter() extends Visitor[Object], sVisitor[Unit] {
         return null
     }
 
+    override def visitAssignExpr(expr: Assign): Object = {
+        var value = evaluate(expr.value)
+        environment.assign(expr.name, value)
+        return value
+    }
+
     override def visitBinaryExpr(expr: Binary): AnyRef = {
         val left = evaluate(expr.left)
         val right = evaluate(expr.right)

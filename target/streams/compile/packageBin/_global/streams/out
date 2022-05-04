@@ -56,8 +56,12 @@
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/expr[0m
 [0m[[0m[0mdebug[0m] [0m[0m	expr/Visitor.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/expr/Visitor.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	expr/Assign.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/expr/Assign.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	expr/Expr.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/expr/Expr.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	expr/Assign.tasty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/expr/Assign.tasty[0m
 [0m[[0m[0mdebug[0m] [0m[0m	expr/Expr.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	  /Users/jbahn/Projects/slox/target/scala-3.1.2/classes/expr/Expr.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	expr/Visitor.tasty[0m

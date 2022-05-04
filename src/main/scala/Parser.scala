@@ -25,7 +25,7 @@ class Parser(var tokens: Array[Token]) {
     }
 
     private def expression(): Expr = {
-        return equality()
+        return assignment()
     }
 
     private def declaration(): Stmt = {
@@ -70,6 +70,24 @@ class Parser(var tokens: Array[Token]) {
         val expr = expression()
         consume(TokenType.SEMICOLON, "Expect ';' after expression.")
         return new Expression(expr)
+    }
+
+    private def assignment(): Expr = {
+        var expr = equality()
+
+        if (matchToken(Array(TokenType.EQUAL))) {
+            var equals = previous()
+            var value = assignment()
+
+            if (expr.isInstanceOf[Variable]) {
+                var name = expr.asInstanceOf[Variable].name
+                return new Assign(name, value)
+            }
+
+            error(equals, "Invalid assignment target.")
+        }
+        
+        return expr
     }
 
     private def equality(): Expr = {
