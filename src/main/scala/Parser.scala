@@ -1,12 +1,27 @@
-package com.craftinginterpreters.lox;
+package parser
+
+import expr._
+import scala.annotation.switch
+import token.Token
+import tokentype.TokenType
+import lox.Lox
 
 
-class Parser {
-    var tokens: Array[Token] = Array()
+class Parser(var tokens: Array[Token]) {
     var current = 0
 
     def main(tokens: Array[Token]): Unit = {
         this.tokens = tokens
+    }
+
+    def parse(): Expr = {
+        try {
+            return expression()
+        } catch {
+            case e: ParseError => {
+                return null
+            }
+        }
     }
 
     private def expression(): Expr = {
@@ -16,7 +31,7 @@ class Parser {
     private def equality(): Expr = {
         var expr = comparison()
 
-        while (checkToken(TokenType.EQUAL) || checkToken(TokenType.NOT_EQUAL)) {
+        while (check(TokenType.BANG_EQUAL) || check(TokenType.EQUAL_EQUAL)) {
             val operator = previous()
             val right = comparison()
             expr = Binary(expr, operator, right)
@@ -28,7 +43,7 @@ class Parser {
     private def comparison(): Expr = {
         var expr = term()
 
-        while (matchToken(Array(TokenType.GREATER, checkToken(TokenType.GREATER_EQUAL), checkToken(TokenType.LESS), checkToken(TokenType.LESS_EQUAL)) {
+        while (matchToken(Array(TokenType.GREATER, TokenType.GREATER_EQUAL, TokenType.LESS, TokenType.LESS_EQUAL))) {
             val operator = previous()
             val right = term()
             expr = Binary(expr, operator, right)
@@ -88,6 +103,8 @@ class Parser {
             val expr = expression()
             consume(TokenType.RIGHT_PAREN, "Expect ')' after expression.")
             return Grouping(expr)
+        
+        throw error(peek(), "Expect expression.")
     }
 
     private def matchToken(types: Array[TokenType]): Boolean = {
@@ -96,10 +113,10 @@ class Parser {
                 advance()
                 return true
             }
+
+            return false
         }
 
-        return false
-    }
 
     private def consume(tok: TokenType, message: String): Unit = {
         if (check(tok)) then
@@ -113,7 +130,7 @@ class Parser {
             return false
         }
 
-        return peek().getType() == tokenType
+        return peek().toktype == tokenType
     }
 
     private def advance(): Token = {
@@ -125,7 +142,7 @@ class Parser {
     }
 
     private def isAtEnd(): Boolean = {
-        return peek().getType() == TokenType.EOF
+        return peek().toktype == TokenType.EOF
     }
 
     private def peek(): Token = {
@@ -136,8 +153,35 @@ class Parser {
         return tokens(current - 1)
     }
 
-    private def error(token: Token, message: String): Nothing = {
-        Lox.error(token, message)
+    private def error(token: Token, message: String): Throwable = {
+        var lox = new Lox()
+        lox.error(token, message)
         return new ParseError()
     }
+
+    private def synchronize(): Unit = {
+        advance()
+
+        while (!isAtEnd()) {
+            if (previous().toktype == TokenType.SEMICOLON) then
+                return
+
+            val test = peek().toktype           
+            test match {
+                case TokenType.CLASS => 
+                case TokenType.FUN =>
+                case TokenType.VAR =>
+                case TokenType.FOR =>
+                case TokenType.IF =>
+                case TokenType.WHILE =>
+                case TokenType.PRINT =>
+                case TokenType.RETURN => return
+            }
+
+            advance()
+        }
+    }
+
+
+    class ParseError() extends RuntimeException()
 }

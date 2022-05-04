@@ -95,9 +95,9 @@ class Scanner(var source: String) {
             while (isDigit(peek())) {
                 advance()
             }
-            
-            addToken(TokenType.NUMBER, (source.substring(start, current)).toDouble)
         }
+
+        addToken(TokenType.NUMBER, (source.substring(start, current)).toDouble)
     }
 
     private def string(): Any = {
@@ -157,9 +157,9 @@ class Scanner(var source: String) {
         return source.charAt(current - 1)
     }
 
-    private def addToken(tokenType: Any) = {
+    private def addToken(tokenType: TokenType, literal: Any = null) = {
         val text = source.substring(start, current)
-        tokens = tokens :+ (new Token(tokenType, text, null, line))
+        tokens = tokens :+ (new Token(tokenType, text, literal, line))
     }
 
     val keywords = Map(

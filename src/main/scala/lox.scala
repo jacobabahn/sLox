@@ -1,5 +1,11 @@
 package lox
 import scanner.Scanner
+import parser.Parser
+import interpreter._
+import runtimeerror.RuntimeError
+import token.Token
+import tokentype.TokenType
+import astprinter.AstPrinter
 
 object sLox {
 	def main(args: Array[String]): Unit = {
@@ -9,7 +15,9 @@ object sLox {
 }
 
 class Lox:
+	val interpreter = new Interpreter()
 	var hadError = false
+	var hadRuntimeError = false
 
 	def main(args: Array[String]) = {
 		if (args.length > 1) then
@@ -24,6 +32,7 @@ class Lox:
 	private def runFile(path: String) = {
 		run(io.Source.fromFile(path).mkString)
 		if (hadError) sys.exit(65)
+		if (hadRuntimeError) sys.exit(70)
 	}
 	
 	private def runPrompt() = {
@@ -35,13 +44,15 @@ class Lox:
 		}
 	}
 
-	private def run(source: String) = {
+	private def run(source: String): Unit = {
 		val scanner = new Scanner(source)
 		val tokens = scanner.scanTokens()
+		val parser = new Parser(tokens)
+		val expression = parser.parse()
 
-		for (token <- tokens) {
-			println(token)
-		}
+		if hadError then return
+		
+		interpreter.interpret(expression)
 	}
 
 	def error(line: Int, message: String) = {
@@ -53,6 +64,11 @@ class Lox:
 			report(token.line, " at end", message)
 		else
 			report(token.line, " at '" + token.lexeme + "'", message)
+	}
+
+	def runtimeError(error: RuntimeError) = {
+		s"${error.message} \n[line ${error.token.line}]"
+		hadRuntimeError = true
 	}
 
 	def report(line: Int, where: String, message: String) = {
