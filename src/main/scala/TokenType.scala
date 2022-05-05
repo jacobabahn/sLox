@@ -41,6 +41,7 @@ enum TokenType {
     case THIS extends TokenType
     case TRUE extends TokenType
     case VAR extends TokenType
+    case CONST extends TokenType
     case WHILE extends TokenType
 
     case EOF extends TokenType

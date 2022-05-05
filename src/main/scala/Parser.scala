@@ -34,7 +34,7 @@ class Parser(var tokens: Array[Token]) {
             if (matchToken(Array(TokenType.FUN))) {
                 return function("function")
             }
-            if (matchToken(Array(TokenType.VAR))) {
+            if (matchToken(Array(TokenType.VAR, TokenType.CONST))) {
                 return varDeclaration()
             }
             return statement()
@@ -69,7 +69,7 @@ class Parser(var tokens: Array[Token]) {
 
         if (matchToken(Array(TokenType.SEMICOLON))) then
             initializer = Expression(null)
-        else if (matchToken(Array(TokenType.VAR))) then
+        else if (matchToken(Array(TokenType.VAR, TokenType.CONST))) then
             initializer = varDeclaration()
         else
             initializer = expressionStatement()
@@ -131,13 +131,19 @@ class Parser(var tokens: Array[Token]) {
     }
 
     private def varDeclaration(): Stmt = {
+        var keyword = previous().toktype
+        var isConst = false
+
+        if keyword == TokenType.CONST then
+            isConst = true
+
         var name = consume(TokenType.IDENTIFIER, "Expect variable name.")
         var initializer: Expr = new Literal(null)
         if (matchToken(Array(TokenType.EQUAL))) then
             initializer = expression()
 
         consume(TokenType.SEMICOLON, "Expect ';' after variable declaration.")
-        return new Var(name, initializer)
+        return new Var(name, initializer, isConst)
     }
 
     private def whileStatement(): Stmt = {
@@ -403,6 +409,7 @@ class Parser(var tokens: Array[Token]) {
                 case TokenType.CLASS => 
                 case TokenType.FUN =>
                 case TokenType.VAR =>
+                case TokenType.CONST =>
                 case TokenType.FOR =>
                 case TokenType.IF =>
                 case TokenType.WHILE =>

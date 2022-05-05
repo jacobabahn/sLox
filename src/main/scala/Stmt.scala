@@ -37,7 +37,7 @@ class If(var condition: Expr, var thenBranch: Stmt, var elseBranch: Stmt) extend
     override def accept[R](visitor: sVisitor[R]): R = return visitor.visitIfStmt(this)
 }
 
-class Var(var name: Token, var initializer: Expr) extends Stmt {
+class Var(var name: Token, var initializer: Expr, var isConst: Boolean) extends Stmt {
     override def accept[R](visitor: sVisitor[R]): R = return visitor.visitVarStmt(this)
 }
 

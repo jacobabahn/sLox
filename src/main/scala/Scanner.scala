@@ -178,6 +178,7 @@ class Scanner(var source: String) {
         "this" -> TokenType.THIS,
         "true" -> TokenType.TRUE,
         "var" -> TokenType.VAR,
+        "const" -> TokenType.CONST,
         "while" -> TokenType.WHILE
     )
 }

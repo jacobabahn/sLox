@@ -1,10 +1,14 @@
-[0m[[0m[31merror[0m] [0m[0mjava.lang.NullPointerException: Cannot invoke "stmt.Stmt.accept(stmt.sVisitor)" because "stmt" is null[0m
-[0m[[0m[31merror[0m] [0m[0m	at interpreter.Interpreter.execute(Interpreter.scala:131)[0m
-[0m[[0m[31merror[0m] [0m[0m	at interpreter.Interpreter.interpret$$anonfun$1(Interpreter.scala:36)[0m
+[0m[[0m[31merror[0m] [0m[0mjava.lang.ClassCastException: class java.lang.String cannot be cast to class token.Token (java.lang.String is in module java.base of loader 'bootstrap'; token.Token is in unnamed module of loader sbt.internal.LayeredClassLoader @6a5cc15e)[0m
+[0m[[0m[31merror[0m] [0m[0m	at environment.Environment.define(Environment.scala:36)[0m
+[0m[[0m[31merror[0m] [0m[0m	at interpreter.Interpreter.visitVarStmt(Interpreter.scala:206)[0m
+[0m[[0m[31merror[0m] [0m[0m	at interpreter.Interpreter.visitVarStmt(Interpreter.scala:202)[0m
+[0m[[0m[31merror[0m] [0m[0m	at stmt.Var.accept(Stmt.scala:41)[0m
+[0m[[0m[31merror[0m] [0m[0m	at interpreter.Interpreter.execute(Interpreter.scala:146)[0m
+[0m[[0m[31merror[0m] [0m[0m	at interpreter.Interpreter.interpret$$anonfun$1(Interpreter.scala:50)[0m
 [0m[[0m[31merror[0m] [0m[0m	at scala.runtime.function.JProcedure1.apply(JProcedure1.java:15)[0m
 [0m[[0m[31merror[0m] [0m[0m	at scala.runtime.function.JProcedure1.apply(JProcedure1.java:10)[0m
 [0m[[0m[31merror[0m] [0m[0m	at scala.collection.ArrayOps$.foreach$extension(ArrayOps.scala:1328)[0m
-[0m[[0m[31merror[0m] [0m[0m	at interpreter.Interpreter.interpret(Interpreter.scala:37)[0m
+[0m[[0m[31merror[0m] [0m[0m	at interpreter.Interpreter.interpret(Interpreter.scala:51)[0m
 [0m[[0m[31merror[0m] [0m[0m	at lox.Lox.run(lox.scala:55)[0m
 [0m[[0m[31merror[0m] [0m[0m	at lox.Lox.runPrompt(lox.scala:41)[0m
 [0m[[0m[31merror[0m] [0m[0m	at lox.Lox.main(lox.scala:28)[0m
@@ -25,4 +29,4 @@
 [0m[[0m[31merror[0m] [0m[0m	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)[0m
 [0m[[0m[31merror[0m] [0m[0m	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)[0m
 [0m[[0m[31merror[0m] [0m[0m	at java.base/java.lang.Thread.run(Thread.java:833)[0m
-[0m[[0m[31merror[0m] [0m[0m(Compile / [31mrun[0m) java.lang.NullPointerException: Cannot invoke "stmt.Stmt.accept(stmt.sVisitor)" because "stmt" is null[0m
+[0m[[0m[31merror[0m] [0m[0m(Compile / [31mrun[0m) java.lang.ClassCastException: class java.lang.String cannot be cast to class token.Token (java.lang.String is in module java.base of loader 'bootstrap'; token.Token is in unnamed module of loader sbt.internal.LayeredClassLoader @6a5cc15e)[0m

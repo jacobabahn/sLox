@@ -67,7 +67,7 @@ class Lox:
 	}
 
 	def runtimeError(error: RuntimeError) = {
-		s"${error.message} \n[line ${error.token.line}]"
+		println(s"${error.message} \n[line ${error.token.line}]")
 		hadRuntimeError = true
 	}
 

@@ -202,7 +202,7 @@ class Interpreter() extends Visitor[Object], sVisitor[Unit] {
         var value: Object = new Literal(null)
         if (stmt.initializer != Literal(null)) then value = evaluate(stmt.initializer) else value = Literal(null)
 
-        environment.define(stmt.name.lexeme, value)
+        environment.define(stmt.name.lexeme, value, stmt.isConst)
         return null
     }
 
