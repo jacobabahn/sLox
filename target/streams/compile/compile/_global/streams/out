@@ -1,8 +1,43 @@
-[0m[[0m[33mwarn[0m] [0m[0m[33m-- [E029] Pattern Match Exhaustivity Warning: /Users/jbahn/Projects/slox/src/main/scala/Parser.scala:336:12 [0m[0m
-[0m[[0m[33mwarn[0m] [0m[0m[33m336 |[0m            test [33mmatch[0m {[0m
-[0m[[0m[33mwarn[0m] [0m[0m    |            [33m^^^^[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m-- [E129] Potential Issue Warning: /Users/jbahn/Projects/slox/src/main/scala/Interpreter.scala:165:15 [0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m165 |[0m        [33mreturn[0m [31mnull[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m    |               [33m^^^^[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m    |A pure expression does nothing in statement position; you may be omitting necessary parentheses[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m-- [E129] Potential Issue Warning: /Users/jbahn/Projects/slox/src/main/scala/Interpreter.scala:170:15 [0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m170 |[0m        [33mreturn[0m [31mnull[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m    |               [33m^^^^[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m    |A pure expression does nothing in statement position; you may be omitting necessary parentheses[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m-- [E129] Potential Issue Warning: /Users/jbahn/Projects/slox/src/main/scala/Interpreter.scala:176:15 [0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m176 |[0m        [33mreturn[0m [31mnull[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m    |               [33m^^^^[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m    |A pure expression does nothing in statement position; you may be omitting necessary parentheses[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m-- [E129] Potential Issue Warning: /Users/jbahn/Projects/slox/src/main/scala/Interpreter.scala:185:15 [0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m185 |[0m        [33mreturn[0m [31mnull[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m    |               [33m^^^^[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m    |A pure expression does nothing in statement position; you may be omitting necessary parentheses[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m-- [E129] Potential Issue Warning: /Users/jbahn/Projects/slox/src/main/scala/Interpreter.scala:191:15 [0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m191 |[0m        [33mreturn[0m [31mnull[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m    |               [33m^^^^[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m    |A pure expression does nothing in statement position; you may be omitting necessary parentheses[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m-- [E129] Potential Issue Warning: /Users/jbahn/Projects/slox/src/main/scala/Interpreter.scala:208:15 [0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m208 |[0m        [33mreturn[0m [31mnull[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m    |               [33m^^^^[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m    |A pure expression does nothing in statement position; you may be omitting necessary parentheses[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m-- [E129] Potential Issue Warning: /Users/jbahn/Projects/slox/src/main/scala/Interpreter.scala:215:15 [0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m215 |[0m        [33mreturn[0m [31mnull[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m    |               [33m^^^^[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m    |A pure expression does nothing in statement position; you may be omitting necessary parentheses[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m-- [E029] Pattern Match Exhaustivity Warning: /Users/jbahn/Projects/slox/src/main/scala/Interpreter.scala:86:8 [0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m86 |[0m        op [33mmatch[0m {[0m
+[0m[[0m[33mwarn[0m] [0m[0m   |        [33m^^[0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m   |[33mmatch[0m may not be exhaustive.[0m
+[0m[[0m[33mwarn[0m] [0m[0m   |[0m
+[0m[[0m[33mwarn[0m] [0m[0m   |It would fail on pattern case: LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE, COMMA, DOT[0m
+[0m[[0m[33mwarn[0m] [0m[0m   |(More unmatched cases are elided)[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m-- [E029] Pattern Match Exhaustivity Warning: /Users/jbahn/Projects/slox/src/main/scala/Interpreter.scala:250:8 [0m[0m
+[0m[[0m[33mwarn[0m] [0m[0m[33m250 |[0m        op [33mmatch[0m {[0m
+[0m[[0m[33mwarn[0m] [0m[0m    |        [33m^^[0m[0m
 [0m[[0m[33mwarn[0m] [0m[0m    |[33mmatch[0m may not be exhaustive.[0m
 [0m[[0m[33mwarn[0m] [0m[0m    |[0m
 [0m[[0m[33mwarn[0m] [0m[0m    |It would fail on pattern case: LEFT_PAREN, RIGHT_PAREN, LEFT_BRACE, RIGHT_BRACE, COMMA, DOT[0m
 [0m[[0m[33mwarn[0m] [0m[0m    |(More unmatched cases are elided)[0m
-[0m[[0m[33mwarn[0m] [0m[0mone warning found[0m
+[0m[[0m[33mwarn[0m] [0m[0m9 warnings found[0m

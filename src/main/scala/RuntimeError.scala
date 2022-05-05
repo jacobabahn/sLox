@@ -8,4 +8,10 @@ class RuntimeError(var token: Token, var message: String) extends RuntimeExcepti
             this.message = message
             this.token = token
         }
+}
+
+class ReturnException(var value: Object) {
+    def main(value: Object): Unit = {
+        this.value = value
     }
+}

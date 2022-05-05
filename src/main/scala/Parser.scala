@@ -6,6 +6,7 @@ import scala.annotation.switch
 import token.Token
 import tokentype.TokenType
 import lox.Lox
+import scala.util.control.Breaks._
 
 
 class Parser(var tokens: Array[Token]) {
@@ -30,6 +31,9 @@ class Parser(var tokens: Array[Token]) {
 
     private def declaration(): Stmt = {
         try {
+            if (matchToken(Array(TokenType.FUN))) {
+                return function("function")
+            }
             if (matchToken(Array(TokenType.VAR))) {
                 return varDeclaration()
             }
@@ -49,6 +53,8 @@ class Parser(var tokens: Array[Token]) {
             return forStatement()
         if (matchToken(Array(TokenType.PRINT))) then
             return printStatement()
+        if (matchToken(Array(TokenType.RETURN))) then
+            return returnStatement()
         if (matchToken(Array(TokenType.WHILE))) then
             return whileStatement()
         if (matchToken(Array(TokenType.LEFT_BRACE))) then
@@ -114,6 +120,16 @@ class Parser(var tokens: Array[Token]) {
         return new Print(value)
     }
 
+    private def returnStatement(): Stmt = {
+        var keyword = previous()
+        var value: Expr = Literal(null)
+        if (!check(TokenType.SEMICOLON)) then
+            value = expression()
+        
+        consume(TokenType.SEMICOLON, "Expect ';' after return value.")
+        return new Return(keyword, value)
+    }
+
     private def varDeclaration(): Stmt = {
         var name = consume(TokenType.IDENTIFIER, "Expect variable name.")
         var initializer: Expr = new Literal(null)
@@ -137,6 +153,25 @@ class Parser(var tokens: Array[Token]) {
         val expr = expression()
         consume(TokenType.SEMICOLON, "Expect ';' after expression.")
         return new Expression(expr)
+    }
+
+    private def function(kind: String): Funct = {
+        var name = consume(TokenType.IDENTIFIER, "Expect " + kind + " name.")
+        var parameters: Array[Token] = Array()
+        var cond = true
+
+        while (cond || matchToken(Array(TokenType.COMMA))) {
+            if (!check(TokenType.RIGHT_PAREN)) then
+                if (parameters.length >= 255) then
+                    error(peek(), "Cannot have more than 255 parameters.")
+                
+                parameters = parameters :+ consume(TokenType.IDENTIFIER, "Expect parameter name.")
+        }
+        consume(TokenType.RIGHT_PAREN, "Expect ')' after parameters.")
+
+        consume(TokenType.LEFT_BRACE, "Expect '{' before " + kind + " body.")
+        var body: Array[Stmt] = block()
+        return Funct(name, parameters, body)
     }
 
     private def block(): Array[Stmt] = {
@@ -247,7 +282,38 @@ class Parser(var tokens: Array[Token]) {
             return Unary(operator, right)
         }
 
-        return primary()
+        return call()
+    }
+
+    private def finishCall(callee: Expr): Expr = {
+        var arguments: Array[Expr] = Array()
+        var cond = true
+
+        if (!check(TokenType.RIGHT_PAREN)) then
+            while (cond || matchToken(Array(TokenType.COMMA))) {
+                if (arguments.length >= 255) then
+                    error(peek(), "Cannot have more than 255 arguments.")
+                arguments = arguments :+ expression()
+                cond = false
+            }
+
+        var paren = consume(TokenType.RIGHT_PAREN, "Expect ')' after arguments.")
+        return Call(callee, paren, arguments)
+    }
+
+    private def call(): Expr = {
+        var expr = primary()
+
+        breakable {
+            while (true) {
+                if (matchToken(Array(TokenType.LEFT_PAREN))) then
+                    expr = finishCall(expr)
+                else
+                    break
+            }
+        }
+
+        return expr
     }
 
     private def primary(): Expr = {

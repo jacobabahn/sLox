@@ -6,6 +6,7 @@ import token.Token
 trait Visitor[R] {
 	def visitAssignExpr(expr: Assign): R
 	def visitBinaryExpr(expr: Binary): R
+	def visitCallExpr(expr: Call): R
 	def visitGroupingExpr(expr: Grouping): R
 	def visitLiteralExpr(expr: Literal): R
 	def visitLogicalExpr(expr: Logical): R
@@ -23,6 +24,10 @@ class Assign(val name: Token, val value: Expr) extends Expr {
 
 class Binary(val left: Expr, val operator: Token, val right: Expr) extends Expr {
 	override def accept[R](visitor: Visitor[R]): R = return visitor.visitBinaryExpr(this)
+}
+
+class Call(val callee: Expr, val paren: Token, val arguments: Array[Expr]) extends Expr {
+	override def accept[R](visitor: Visitor[R]): R = return visitor.visitCallExpr(this)
 }
 
 class Grouping(val expression: Expr) extends Expr {

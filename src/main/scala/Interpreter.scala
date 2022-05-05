@@ -7,13 +7,42 @@ import tokentype._
 import token._
 import environment._
 import runtimeerror._
+import loxcallable._
+import loxfunction._
 import math.Fractional.Implicits.infixFractionalOps
 import math.Integral.Implicits.infixIntegralOps
 import math.Numeric.Implicits.infixNumericOps
 
 
 class Interpreter() extends Visitor[Object], sVisitor[Unit] {
-    private var environment: Environment = new Environment()
+    private val globals = new Environment()
+    var environment: Environment = globals
+
+    globals.define("clock", new LoxCallable {
+        override def arity(): Int = { return 0 }
+
+        override def call(interpreter: Interpreter, arguments: Array[Object]): Object = {
+            return (System.currentTimeMillis() / 1000.0).asInstanceOf[Object]
+        }
+
+        override def toString() = { return "<native fn>" }
+    })
+
+    globals.define("random", new LoxCallable {
+        override def arity(): Int = { return 0 }
+        override def call(interpreter: Interpreter, arguments: Array[Object]): Object = {
+            return (Math.random() * 100).asInstanceOf[Object]
+        }
+        override def toString() = { return "<native fn>" }
+    })
+
+    globals.define("input", new LoxCallable {
+        override def arity(): Int = { return 1 }
+        override def call(interpreter: Interpreter, arguments: Array[Object]): Object = {
+            return arguments(0).asInstanceOf[String]
+        }
+        override def toString() = { return "<native fn>" }
+    })
 
     def interpret(statements: Array[Stmt]) = {
         try {
@@ -118,6 +147,7 @@ class Interpreter() extends Visitor[Object], sVisitor[Unit] {
 
     def executeBlock(statements: Array[Stmt], environment: Environment): Unit = {
         val previous = this.environment
+
         try {
             this.environment = environment
             for (statement <- statements) {
@@ -138,6 +168,12 @@ class Interpreter() extends Visitor[Object], sVisitor[Unit] {
         return null
     }
 
+    override def visitFunctStmt(stmt: Funct): Unit = {
+        val function = new LoxFunction(stmt)
+        environment.define(stmt.name.lexeme, function)
+        return null
+    }
+
     override def visitIfStmt(stmt: If): Unit = {
         if (isTruthy(evaluate(stmt.condition))) {
             execute(stmt.thenBranch)
@@ -151,6 +187,15 @@ class Interpreter() extends Visitor[Object], sVisitor[Unit] {
         var value = evaluate(stmt.expression)
         println(stringify(value))
         return null
+    }
+
+    override def visitReturnStmt(stmt: Return): Unit = {
+        var value: Token = null
+        if (stmt.value != null) {
+            value = evaluate(stmt.value).asInstanceOf[Token]
+        }
+
+        return new ReturnException(value)
     }
 
     override def visitVarStmt(stmt: Var): Unit = {
@@ -172,6 +217,27 @@ class Interpreter() extends Visitor[Object], sVisitor[Unit] {
         var value = evaluate(expr.value)
         environment.assign(expr.name, value)
         return value
+    }
+
+    override def visitCallExpr(expr: Call): Object = {
+        var callee = evaluate(expr.callee)
+
+        var arguments: Array[Object] = Array()
+        for (argument <- expr.arguments) {
+            arguments = arguments :+ evaluate(argument)
+        }
+
+        if (!callee.isInstanceOf[LoxCallable]) {
+            throw new RuntimeError(expr.paren, "Can only call functions and classes.")
+        }
+
+        var function = callee.asInstanceOf[LoxCallable]
+        if (arguments.length != function.arity()) {
+            throw new RuntimeError(expr.paren, "Expected " + function.arity() + " arguments but got " + arguments.length + ".")
+        }
+
+        val temp = function.call(this, arguments)
+        return temp
     }
 
     override def visitBinaryExpr(expr: Binary): AnyRef = {
